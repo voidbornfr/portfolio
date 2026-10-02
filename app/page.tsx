@@ -80,12 +80,21 @@ export default function Home() {
       <div className="relative z-20 flex flex-col min-h-screen px-8 md:px-16 lg:px-24">
         
         {/* Navbar */}
-        <nav className="flex items-center justify-between py-10">
+        <nav className="flex items-center justify-between py-6 md:py-10">
           {/* Logo */}
-          <div className="text-xl font-bold tracking-[0.2em] flex items-center gap-3">
-            <div className="w-2 h-2 bg-white rounded-full"></div>
-            VOID
-          </div>
+          <a href="#" className="flex items-center gap-3 group transition-opacity hover:opacity-90">
+            <Image
+              src="/logo.png"
+              alt="VOID Logo"
+              width={40}
+              height={40}
+              priority
+              className="w-8 h-8 md:w-10 md:h-10 object-contain drop-shadow-[0_0_8px_rgba(255,255,255,0.2)] group-hover:scale-105 transition-transform duration-300"
+            />
+            <span className="text-lg md:text-xl font-bold tracking-[0.2em] text-white">
+              VOID
+            </span>
+          </a>
           
           {/* Right Actions */}
           <div className="flex items-center gap-8 text-xs tracking-widest uppercase font-medium">

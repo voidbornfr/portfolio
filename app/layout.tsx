@@ -19,6 +19,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "VOID // Voidborn Ecosystem",
   description: "Next-generation streaming platforms, liquid-glass desktop applications, Arch Linux utilities, and no-code builders engineered by voidborn.",
+  icons: {
+    icon: "/logo.png",
+    shortcut: "/logo.png",
+    apple: "/logo.png",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
