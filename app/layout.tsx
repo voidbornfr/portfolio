@@ -1,9 +1,7 @@
 import type { Metadata } from "next";
 import { Black_Ops_One, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import BackgroundMusic from "@/components/BackgroundMusic";
-import SplashWrapper from "@/components/SplashWrapper";
-import AITerminal from "@/components/AITerminal";
+import ClientShell from "@/components/ClientShell";
 
 const blackOpsOne = Black_Ops_One({
   variable: "--font-black-ops-one",
@@ -33,10 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${blackOpsOne.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <SplashWrapper />
-        {children}
-        <AITerminal />
-        <BackgroundMusic />
+        <ClientShell>{children}</ClientShell>
       </body>
     </html>
   );

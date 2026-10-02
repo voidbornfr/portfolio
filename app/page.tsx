@@ -10,34 +10,58 @@ export default function Home() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovering, setIsHovering] = useState(false);
+  // Detect touch/pointer:coarse devices — no mouse reveal on these
+  const [isMobile, setIsMobile] = useState(false);
+  const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
+    // Detect touch devices on mount
+    const mq = window.matchMedia("(pointer: coarse)");
+    setIsMobile(mq.matches);
+  }, []);
+
+  useEffect(() => {
+    // Skip the mousemove listener entirely on touch devices
+    if (isMobile) return;
+
     const handleMouseMove = (e: MouseEvent) => {
       if (!containerRef.current) return;
       const rect = containerRef.current.getBoundingClientRect();
-      
-      // We can use a bit of lerp if we want, but simple tracking is fine and responsive
-      setMousePos({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      // Cancel any pending RAF before scheduling a new one
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+      }
+      rafIdRef.current = requestAnimationFrame(() => {
+        setMousePos({ x, y });
+        rafIdRef.current = null;
       });
     };
+
+    const handleMouseEnter = () => setIsHovering(true);
+    const handleMouseLeave = () => setIsHovering(false);
 
     const container = containerRef.current;
     if (container) {
       container.addEventListener("mousemove", handleMouseMove);
-      container.addEventListener("mouseenter", () => setIsHovering(true));
-      container.addEventListener("mouseleave", () => setIsHovering(false));
+      container.addEventListener("mouseenter", handleMouseEnter);
+      container.addEventListener("mouseleave", handleMouseLeave);
     }
 
     return () => {
+      if (rafIdRef.current !== null) {
+        cancelAnimationFrame(rafIdRef.current);
+        rafIdRef.current = null;
+      }
       if (container) {
         container.removeEventListener("mousemove", handleMouseMove);
-        container.removeEventListener("mouseenter", () => setIsHovering(true));
-        container.removeEventListener("mouseleave", () => setIsHovering(false));
+        container.removeEventListener("mouseenter", handleMouseEnter);
+        container.removeEventListener("mouseleave", handleMouseLeave);
       }
     };
-  }, []);
+  }, [isMobile]);
 
   return (
     <main>
@@ -58,23 +82,30 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/40 to-black/20 z-10" />
       </div>
 
-      {/* Reveal Layer */}
-      <div 
-        className="absolute inset-0 z-10 pointer-events-none transition-opacity duration-500 ease-out"
-        style={{
-          opacity: isHovering ? 1 : 0,
-          maskImage: `radial-gradient(260px circle at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
-          WebkitMaskImage: `radial-gradient(260px circle at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
-        }}
-      >
-        <Image
-          src="/BG_IMAGE_2.png"
-          alt="Reveal Background"
-          fill
-          priority
-          className="object-cover object-center"
-        />
-      </div>
+      {/* Reveal Layer — only rendered on desktop (pointer:fine devices) */}
+      {!isMobile && (
+        <div 
+          className="absolute inset-0 z-10 pointer-events-none transition-opacity duration-500 ease-out"
+          style={{
+            opacity: isHovering ? 1 : 0,
+            maskImage: `radial-gradient(260px circle at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
+            WebkitMaskImage: `radial-gradient(260px circle at ${mousePos.x}px ${mousePos.y}px, black 30%, transparent 100%)`,
+          }}
+        >
+          <Image
+            src="/BG_IMAGE_2.png"
+            alt="Reveal Background"
+            fill
+            priority
+            className="object-cover object-center"
+          />
+        </div>
+      )}
+
+      {/* Static gradient overlay for mobile — lightweight alternative to reveal layer */}
+      {isMobile && (
+        <div className="absolute inset-0 z-10 pointer-events-none bg-gradient-to-br from-white/5 via-transparent to-white/[0.03]" />
+      )}
 
       {/* Content wrapper */}
       <div className="relative z-20 flex flex-col min-h-screen px-8 md:px-16 lg:px-24">

@@ -75,6 +75,8 @@ export default function ScrollSequence() {
     if (!ctx) return;
 
     let rafId: number;
+    // Track whether the section is in the viewport
+    const isVisibleRef = { current: false };
 
     const fitCanvas = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -86,6 +88,22 @@ export default function ScrollSequence() {
 
     fitCanvas();
     window.addEventListener("resize", fitCanvas);
+
+    // IntersectionObserver: pause RAF when section scrolled out of view
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        isVisibleRef.current = entry.isIntersecting;
+        if (entry.isIntersecting) {
+          // Restart the loop when scrolling back in
+          rafId = requestAnimationFrame(render);
+        } else {
+          // Pause the loop when section is off screen
+          cancelAnimationFrame(rafId);
+        }
+      },
+      { threshold: 0 }
+    );
+    if (containerRef.current) observer.observe(containerRef.current);
 
     const render = () => {
       const container = containerRef.current;
@@ -162,7 +180,10 @@ export default function ScrollSequence() {
         }
       }
 
-      rafId = requestAnimationFrame(render);
+      // Only re-schedule if still visible
+      if (isVisibleRef.current) {
+        rafId = requestAnimationFrame(render);
+      }
     };
 
     rafId = requestAnimationFrame(render);
@@ -170,6 +191,7 @@ export default function ScrollSequence() {
     return () => {
       cancelAnimationFrame(rafId);
       window.removeEventListener("resize", fitCanvas);
+      observer.disconnect();
     };
   }, []);
 

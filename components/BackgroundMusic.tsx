@@ -134,7 +134,7 @@ export default function BackgroundMusic() {
       <audio
         ref={audioRef}
         src="/audio/music.weba"
-        preload="auto"
+        preload="none"
         loop
         playsInline
         autoPlay

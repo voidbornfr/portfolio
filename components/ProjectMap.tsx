@@ -588,8 +588,12 @@ function ButterflyOverlay({
 
   return (
     <Canvas
-      dpr={[1, 2]}
-      gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
+      dpr={[1, 1.5]}
+      gl={{
+        antialias: typeof window !== "undefined" && !window.matchMedia("(pointer: coarse)").matches,
+        alpha: true,
+        powerPreference: "high-performance",
+      }}
       camera={{ fov: 40, position: [0, 0, 1200], near: 1, far: 6000 }}
       style={{
         position: "fixed",

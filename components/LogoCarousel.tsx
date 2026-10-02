@@ -166,7 +166,7 @@ function MarqueeRow({
 
       <div
         className={`flex w-max ${animClass}`}
-        style={{ animationDuration: `${speed}s` }}
+        style={{ animationDuration: `${speed}s`, willChange: "transform" }}
       >
         {repeated.map((item, i) => (
           <LogoItem key={`${item.name}-${i}`} name={item.name} iconKey={item.iconKey} />

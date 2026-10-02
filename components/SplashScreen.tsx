@@ -85,12 +85,12 @@ export default function SplashScreen() {
         };
       });
 
-    const initialBatch = Array.from({ length: 35 }, (_, i) => loadFrame(i));
+    const initialBatch = Array.from({ length: 20 }, (_, i) => loadFrame(i));
     Promise.all(initialBatch).then(() => {
       if (!active) return;
       if (!readyRef.current) { readyRef.current = true; setReady(true); }
       const loadRemaining = async () => {
-        for (let i = 35; i < TOTAL_FRAMES; i += 12) {
+        for (let i = 20; i < TOTAL_FRAMES; i += 12) {
           if (!active) break;
           await Promise.all(
             Array.from({ length: Math.min(12, TOTAL_FRAMES - i) }, (_, j) => loadFrame(i + j))
@@ -113,7 +113,8 @@ export default function SplashScreen() {
     if (!ctx) return;
 
     const resize = () => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      // Cap dpr at 1.5 — on 3x Retina displays this saves ~56% of pixels
+      const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
       canvas.width = Math.round(window.innerWidth * dpr);
       canvas.height = Math.round(window.innerHeight * dpr);
     };

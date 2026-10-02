@@ -226,7 +226,8 @@ export default function GamePage() {
 
       <Canvas
         camera={{ position: [0, 6, 12], fov: 60 }}
-        gl={{ antialias: true }}
+        dpr={[1, 1.5]}
+        gl={{ antialias: false, powerPreference: "high-performance" }}
       >
         {/* Vibrant Fantasy Sky Background */}
         <color attach="background" args={["#87CEEB"]} />
