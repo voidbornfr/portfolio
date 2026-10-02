@@ -263,3 +263,19 @@ button, a, [role="button"] {
     display: none;
   }
 }
+
+/* ── Mobile bottom sheet slide-up animation ──────────────────────── */
+@keyframes slide-up-sheet {
+  from { transform: translateY(100%); }
+  to   { transform: translateY(0); }
+}
+
+.mobile-sheet-open {
+  animation: slide-up-sheet 0.3s cubic-bezier(0.32, 0.72, 0, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobile-sheet-open {
+    animation: none;
+  }
+}

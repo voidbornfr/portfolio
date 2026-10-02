@@ -1,0 +1,43 @@
+{
+  "id": "FEAT-003",
+  "type": "feat",
+  "description": "Complete mobile overhaul of the ProjectMap ('Chart Your Course') section. On mobile, the current design relies entirely on mouse hover to discover projects (the butterfly follows the cursor, the trail is drawn by moving the mouse, and the project preview cards open on hover). None of this works with touch. This FEAT replaces the mobile experience with a fully touch-native design while keeping the desktop experience 100% unchanged. Depends on FEAT-001 and FEAT-002.",
+  "status": "completed",
+  "steps": [
+    "1. components/ProjectMap.tsx — Detect mobile/touch at runtime: add a useMemo or useState isMobile that checks mapW < 640 (already tracked via ResizeObserver). Use this to branch the rendering.",
+
+    "2. components/ProjectMap.tsx — On mobile, suppress the ButterflyOverlay entirely: change the condition from {inSection && <ButterflyOverlay ...>} to {inSection && !isMobile && <ButterflyOverlay ...>}. The butterfly 3D Canvas is completely pointless on touch-only devices and is a major GPU drain.",
+
+    "3. components/ProjectMap.tsx — Touch-based trail reveal: On mobile, the trail should auto-reveal as the user scrolls through the map. Add a scroll-based progress reveal: inside the main RAF loop, when !mouseRef.current.active (which is always true on mobile since there's no mousemove listener on the section), check the vertical scroll position of the mapRef relative to the viewport. As the map scrolls into view from top to bottom, progressively advance progressRef.current automatically — map scroll progress (0→1) to frontierIndex (0→samples.length-1). This gives the trail a satisfying auto-draw effect on mobile without any interaction required.",
+
+    "4. components/ProjectMap.tsx — Touch-based project opening: The Marker component currently uses onMouseEnter/onMouseLeave for hover preview, and onClick for lightbox. On mobile, hover doesn't work. The 'hover for preview' compact card and expanded card use the hovered state. On mobile (isMobile), skip the hover card entirely and make the marker's onClick directly open the lightbox (which already works). Remove the 'Hover for preview' text from the compact card footer on mobile — replace it with 'Tap to open'.",
+
+    "5. components/ProjectMap.tsx — Mobile marker tap area: The marker div is w-6 h-6 (24px) which is below the 44px minimum touch target. On mobile, increase it to w-11 h-11 (44px) — keep the visual dot size the same with an inner span, just pad the tap area. Change the className for mobile: when isMobile, use className='group absolute w-11 h-11 ...' with the visual elements centered inside using flex items-center justify-center.",
+
+    "6. components/ProjectMap.tsx — Mobile card positioning: The current card positioning (anchor function) places cards to the left or right of markers. On mobile with mapW < 640, all markers are squeezed together and left/right placement clips out of the container. The Marker component already has some mobile handling (isMobile check at mapW < 800). Improve it: on mobile, ALWAYS show a centered bottom card when a marker is tapped (not hovered — use a touchedId state instead of hoverId). The card should be position:fixed at the bottom of the screen, not absolutely positioned near the marker, to avoid all overflow/clipping issues. Make it a slide-up sheet: fixed bottom-0 left-0 right-0 with a white border-t, rounded-t-2xl, p-4, showing the project title, tagline, an Open button, and a Gallery button. This is a standard mobile bottom sheet pattern.",
+
+    "7. components/ProjectMap.tsx — Add a touchedId state (separate from hoverId, which remains for desktop). Wire the Marker component: on mobile (isMobile prop), pass onTouch callback instead of onHover, and store touchedId in the parent. Render the bottom sheet in the section (outside the map div, at section level) when touchedId is non-null. Add a close button (X) or tap-outside to dismiss. The bottom sheet must be z-50 to clear the map.",
+
+    "8. components/ProjectMap.tsx — The section header on mobile: 'Chart Your Course' h2 uses text-3xl md:text-5xl lg:text-[56px]. On mobile text-3xl (30px) is fine. The description paragraph below it is currently max-w-2xl — on mobile this is the full width, good. The two CTA buttons (Explore GitHub, YouTube) use flex-shrink-0 and are in a separate div below the title. On mobile they currently wrap below but the flex-direction is column (flex-col), so they stack. Improve: make the CTA buttons full-width on mobile: add w-full sm:w-auto to each button.",
+
+    "9. components/ProjectMap.tsx — The legend row ('Treasure · live project', 'Sequential Trail', etc.) has flex-wrap items-center gap-x-7. On mobile this creates a messy multi-line legend. On mobile, show only the essential legend item: hide the Sequential Trail and 'Uncharted territory' and 'Origin' items on mobile, keep only the Treasure and EXPEDITION count. Use hidden sm:flex or hidden sm:inline-flex on those spans.",
+
+    "10. components/ProjectMap.tsx — The bottom instruction text 'Guide the butterfly...' should be replaced on mobile with 'Scroll to reveal the map • Tap any marker to explore'. Use a conditional render based on isMobile.",
+
+    "11. globals.css — Add a mobile-specific bottom sheet animation. Add: @keyframes slide-up-sheet { from { transform: translateY(100%); } to { transform: translateY(0); } } .mobile-sheet-open { animation: slide-up-sheet 0.3s cubic-bezier(0.32, 0.72, 0, 1) both; } Also add @media (prefers-reduced-motion: reduce) override to skip the animation."
+  ],
+  "acceptance_criteria": [
+    "npm run build completes with exit code 0",
+    "On mobile viewport (<640px), the 3D butterfly Canvas is NOT mounted",
+    "On mobile viewport, the map trail auto-draws as the user scrolls through the map section",
+    "On mobile viewport, tapping a marker opens a bottom sheet with project info and Open/Gallery buttons",
+    "Marker tap target is at least 44x44px on mobile",
+    "The CTA buttons (GitHub, YouTube) are full-width on mobile",
+    "Desktop experience (hover trail, butterfly, hover cards) is 100% unchanged"
+  ],
+  "verification": [
+    "npm run build from c:\\Users\\lordr\\Downloads\\portfolio-3d — must exit 0 with no errors"
+  ],
+  "blocked_reason": null,
+  "findings": "All 10 steps implemented. isMobile branched on mapW < 640 via ResizeObserver. ButterflyOverlay suppressed on mobile. Scroll-based trail auto-reveal added in RAF loop for mobile (rect.width < 640). Marker tap target expanded to w-11 h-11 with inner w-6 h-6 visual dot. touchedId state added; Marker receives isMobile + onTouch props; tapping on mobile opens bottom sheet instead of lightbox directly. Bottom sheet is fixed bottom-0 z-50 with slide-up animation, shows title/tagline/Open/Gallery buttons. Lightbox still opens from Gallery button in sheet. Hover cards (compact + expanded) only render when !isMobile. Legend items Sequential Trail, Uncharted, Origin hidden on mobile with hidden sm:flex. CTA buttons have w-full sm:w-auto. Instruction text is conditional. globals.css has slide-up-sheet keyframe + prefers-reduced-motion override. Build: exit 0, no TS errors."
+}
