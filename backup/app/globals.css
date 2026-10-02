@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: #000000;
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Marquee animations */
+@keyframes marquee-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-33.333%); }
+}
+
+@keyframes marquee-right {
+  0%   { transform: translateX(-33.333%); }
+  100% { transform: translateX(0); }
+}
+
+.animate-marquee-left {
+  animation: marquee-left linear infinite;
+}
+
+.animate-marquee-right {
+  animation: marquee-right linear infinite;
+}
+
+/* Pause on hover */
+.animate-marquee-left:hover,
+.animate-marquee-right:hover {
+  animation-play-state: paused;
+}
+
+/* ── Bento card animations ─────────────────────────────────── */
+
+/* Shine sweep on hover */
+@keyframes bento-shine {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* Slide progress pulse */
+@keyframes slide-progress {
+  0%   { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
+/* Fade-up for info panel */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0);   }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.35s ease-out forwards;
+}
+
+/* Ken-Burns slow zoom (used on hero card) */
+@keyframes ken-burns {
+  0%   { transform: scale(1);     }
+  100% { transform: scale(1.08);  }
+}
+
+/* Thin scrollbar for thumbnail tray */
+.scrollbar-thin::-webkit-scrollbar       { height: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.18); border-radius: 4px; }
+.scrollbar-thin::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.35); }
+
+/* ── Sleek Dark Liquid-Glass Pop-Up Hover Animation ────────────────── */
+.glass-popup-tier {
+  position: absolute;
+  transform-origin: bottom left;
+  border-radius: 10% 14% 45% 0% / 10% 14% 75% 0%;
+  transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+/* Tier 1: Outer faint ambient glass tier (Category & Status) */
+.glass-tier-1 {
+  width: 88%;
+  height: 84%;
+  bottom: -88%;
+  left: -88%;
+  background: rgba(14, 15, 20, 0.78);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.28);
+  border-right: 1.5px solid rgba(255, 255, 255, 0.2);
+  box-shadow: rgba(0, 0, 0, 0.55) -8px 8px 30px 0px;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 6;
+  padding: 14px 20px 14px 18px;
+}
+
+/* Tier 2: Mid-layer frosted smoky glass (Feature Tags & Carousel) */
+.glass-tier-2 {
+  width: 76%;
+  height: 66%;
+  bottom: -74%;
+  left: -74%;
+  background: rgba(12, 13, 17, 0.88);
+  border-top: 1.5px solid rgba(255, 255, 255, 0.36);
+  border-right: 1.5px solid rgba(255, 255, 255, 0.26);
+  box-shadow: rgba(0, 0, 0, 0.7) -10px 10px 35px 0px;
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition-delay: 0.08s;
+  z-index: 8;
+  padding: 12px 18px 12px 16px;
+}
+
+/* Foreground: Main dark liquid-glass content container (Title & Summary) */
+.glass-popup-content {
+  position: absolute;
+  width: 60%;
+  min-width: 270px;
+  max-width: 95%;
+  bottom: -85%;
+  left: -85%;
+  background: rgba(8, 9, 12, 0.96);
+  border-top: 2px solid rgba(255, 255, 255, 0.48);
+  border-right: 1.5px solid rgba(255, 255, 255, 0.36);
+  border-radius: 10% 14% 45% 0% / 10% 14% 75% 0%;
+  box-shadow: rgba(0, 0, 0, 0.88) -12px 12px 40px 0px, inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform-origin: bottom left;
+  transition: all 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.16s;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  z-index: 10;
+  padding: 16px 20px 16px 16px;
+}
+
+/* On hover: all tiers slide into view */
+.group:hover .glass-tier-1 {
+  bottom: -1px;
+  left: -1px;
+}
+.group:hover .glass-tier-2 {
+  bottom: -1px;
+  left: -1px;
+}
+.group:hover .glass-popup-content {
+  bottom: -1px;
+  left: -1px;
+}
+

@@ -1,0 +1,1197 @@
+
+> portfolio-3d@0.1.0 dev
+> next dev --port 3000
+
+▲ Next.js 16.3.8 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.1.12:3000
+✓ Ready in 739ms
+✓ Running next.config.ts took 79ms
+
+ GET / 200 in 474ms (next.js: 198ms, application-code: 276ms)
+ GET / 200 in 95ms (next.js: 8ms, application-code: 87ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 94ms (next.js: 13ms, application-code: 80ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+✓ Compiled in 387ms
+ GET / 200 in 110ms (next.js: 34ms, application-code: 76ms)
+ GET / 200 in 48ms (next.js: 12ms, application-code: 36ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+✓ Compiled in 217ms
+ GET / 200 in 141ms (next.js: 48ms, application-code: 93ms)
+ GET / 200 in 44ms (next.js: 13ms, application-code: 32ms)
+ GET / 200 in 114ms (next.js: 7ms, application-code: 107ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+✓ Compiled in 202ms
+ GET / 200 in 55ms (next.js: 20ms, application-code: 35ms)
+✓ Compiled in 124ms
+ GET / 200 in 39ms (next.js: 15ms, application-code: 24ms)
+ GET / 200 in 37ms (next.js: 15ms, application-code: 21ms)
+✓ Compiled in 128ms
+ GET / 200 in 134ms (next.js: 17ms, application-code: 117ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+✓ Compiled in 204ms
+ GET / 200 in 87ms (next.js: 24ms, application-code: 63ms)
+ GET / 200 in 87ms (next.js: 48ms, application-code: 39ms)
+ GET / 200 in 128ms (next.js: 12ms, application-code: 116ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+✓ Compiled in 387ms
+ GET / 200 in 452ms (next.js: 75ms, application-code: 377ms)
+ GET / 200 in 480ms (next.js: 286ms, application-code: 194ms)
+ GET / 200 in 168ms (next.js: 18ms, application-code: 150ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 57ms (next.js: 14ms, application-code: 42ms)
+ GET / 200 in 27ms (next.js: 7ms, application-code: 20ms)
+✓ Compiled in 152ms
+✓ Compiled in 113ms
+ GET / 200 in 57ms (next.js: 14ms, application-code: 43ms)
+ GET / 200 in 21ms (next.js: 5ms, application-code: 17ms)
+ GET / 200 in 48ms (next.js: 10ms, application-code: 38ms)
+ GET / 200 in 21ms (next.js: 6ms, application-code: 15ms)
+✓ Compiled in 117ms
+ GET / 200 in 111ms (next.js: 21ms, application-code: 91ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 67ms (next.js: 7ms, application-code: 61ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+⨯ ./app/layout.tsx:4:1
+Error: Module not found: Can't resolve '@/components/SplashScreen'
+  [90m2 |[0m [36mimport[0m { [33mGeist[0m, [33mGeist_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+  [90m3 |[0m [36mimport[0m [32m"./globals.css"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mSplashScreen[0m [36mfrom[0m [32m"@/components/SplashScreen"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mBackgroundMusic[0m [36mfrom[0m [32m"@/components/BackgroundMusic"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m geistSans = [33mGeist[0m({
+
+Import map: aliased to relative './components/SplashScreen' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/layout.tsx:4:1
+Error: Module not found: Can't resolve '@/components/SplashScreen'
+  [90m2 |[0m [36mimport[0m { [33mGeist[0m, [33mGeist_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+  [90m3 |[0m [36mimport[0m [32m"./globals.css"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mSplashScreen[0m [36mfrom[0m [32m"@/components/SplashScreen"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mBackgroundMusic[0m [36mfrom[0m [32m"@/components/BackgroundMusic"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m geistSans = [33mGeist[0m({
+
+Import map: aliased to relative './components/SplashScreen' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/page.tsx:7:1
+Error: Module not found: Can't resolve '@/components/ProjectMap'
+  [90m 5 |[0m [36mimport[0m [33mScrollSequence[0m [36mfrom[0m [32m"@/components/ScrollSequence"[0m;
+  [90m 6 |[0m [36mimport[0m [33mLogoCarousel[0m [36mfrom[0m [32m"@/components/LogoCarousel"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m [33mProjectMap[0m [36mfrom[0m [32m"@/components/ProjectMap"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+  [90m10 |[0m   [36mconst[0m containerRef = useRef<[33mHTMLDivElement[0m>([36mnull[0m);
+
+Import map: aliased to relative './components/ProjectMap' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/page.tsx:7:1
+Error: Module not found: Can't resolve '@/components/ProjectMap'
+  [90m 5 |[0m [36mimport[0m [33mScrollSequence[0m [36mfrom[0m [32m"@/components/ScrollSequence"[0m;
+  [90m 6 |[0m [36mimport[0m [33mLogoCarousel[0m [36mfrom[0m [32m"@/components/LogoCarousel"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m [33mProjectMap[0m [36mfrom[0m [32m"@/components/ProjectMap"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+  [90m10 |[0m   [36mconst[0m containerRef = useRef<[33mHTMLDivElement[0m>([36mnull[0m);
+
+Import map: aliased to relative './components/ProjectMap' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/page.tsx:7:1
+Error: Module not found: Can't resolve '@/components/ProjectMap'
+  [90m 5 |[0m [36mimport[0m [33mScrollSequence[0m [36mfrom[0m [32m"@/components/ScrollSequence"[0m;
+  [90m 6 |[0m [36mimport[0m [33mLogoCarousel[0m [36mfrom[0m [32m"@/components/LogoCarousel"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m [33mProjectMap[0m [36mfrom[0m [32m"@/components/ProjectMap"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+  [90m10 |[0m   [36mconst[0m containerRef = useRef<[33mHTMLDivElement[0m>([36mnull[0m);
+
+Import map: aliased to relative './components/ProjectMap' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/page.tsx:7:1
+Error: Module not found: Can't resolve '@/components/ProjectMap'
+  [90m 5 |[0m [36mimport[0m [33mScrollSequence[0m [36mfrom[0m [32m"@/components/ScrollSequence"[0m;
+  [90m 6 |[0m [36mimport[0m [33mLogoCarousel[0m [36mfrom[0m [32m"@/components/LogoCarousel"[0m;
+[31m[1m>[0m [90m 7 |[0m [36mimport[0m [33mProjectMap[0m [36mfrom[0m [32m"@/components/ProjectMap"[0m;
+  [90m   |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m 8 |[0m
+  [90m 9 |[0m [36mexport[0m [36mdefault[0m [36mfunction[0m [33mHome[0m() {
+  [90m10 |[0m   [36mconst[0m containerRef = useRef<[33mHTMLDivElement[0m>([36mnull[0m);
+
+Import map: aliased to relative './components/ProjectMap' inside of [project]/
+
+
+Import traces:
+  Client Component Browser:
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/layout.tsx:4:1
+Error: Module not found: Can't resolve '@/components/SplashScreen'
+  [90m2 |[0m [36mimport[0m { [33mGeist[0m, [33mGeist_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+  [90m3 |[0m [36mimport[0m [32m"./globals.css"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mSplashScreen[0m [36mfrom[0m [32m"@/components/SplashScreen"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mBackgroundMusic[0m [36mfrom[0m [32m"@/components/BackgroundMusic"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m geistSans = [33mGeist[0m({
+
+Import map: aliased to relative './components/SplashScreen' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/layout.tsx:4:1
+Error: Module not found: Can't resolve '@/components/SplashScreen'
+  [90m2 |[0m [36mimport[0m { [33mGeist[0m, [33mGeist_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+  [90m3 |[0m [36mimport[0m [32m"./globals.css"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mSplashScreen[0m [36mfrom[0m [32m"@/components/SplashScreen"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mBackgroundMusic[0m [36mfrom[0m [32m"@/components/BackgroundMusic"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m geistSans = [33mGeist[0m({
+
+Import map: aliased to relative './components/SplashScreen' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/layout.tsx:4:1
+Error: Module not found: Can't resolve '@/components/SplashScreen'
+  [90m2 |[0m [36mimport[0m { [33mGeist[0m, [33mGeist_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+  [90m3 |[0m [36mimport[0m [32m"./globals.css"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mSplashScreen[0m [36mfrom[0m [32m"@/components/SplashScreen"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mBackgroundMusic[0m [36mfrom[0m [32m"@/components/BackgroundMusic"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m geistSans = [33mGeist[0m({
+
+Import map: aliased to relative './components/SplashScreen' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/layout.tsx:4:1
+Error: Module not found: Can't resolve '@/components/SplashScreen'
+  [90m2 |[0m [36mimport[0m { [33mGeist[0m, [33mGeist_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+  [90m3 |[0m [36mimport[0m [32m"./globals.css"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mSplashScreen[0m [36mfrom[0m [32m"@/components/SplashScreen"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mBackgroundMusic[0m [36mfrom[0m [32m"@/components/BackgroundMusic"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m geistSans = [33mGeist[0m({
+
+Import map: aliased to relative './components/SplashScreen' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/layout.tsx:4:1
+Error: Module not found: Can't resolve '@/components/SplashScreen'
+  [90m2 |[0m [36mimport[0m { [33mGeist[0m, [33mGeist_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+  [90m3 |[0m [36mimport[0m [32m"./globals.css"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mSplashScreen[0m [36mfrom[0m [32m"@/components/SplashScreen"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mBackgroundMusic[0m [36mfrom[0m [32m"@/components/BackgroundMusic"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m geistSans = [33mGeist[0m({
+
+Import map: aliased to relative './components/SplashScreen' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./app/layout.tsx:4:1
+Error: Module not found: Can't resolve '@/components/SplashScreen'
+  [90m2 |[0m [36mimport[0m { [33mGeist[0m, [33mGeist_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+  [90m3 |[0m [36mimport[0m [32m"./globals.css"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m [33mSplashScreen[0m [36mfrom[0m [32m"@/components/SplashScreen"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m [33mBackgroundMusic[0m [36mfrom[0m [32m"@/components/BackgroundMusic"[0m;
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m geistSans = [33mGeist[0m({
+
+Import map: aliased to relative './components/SplashScreen' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./components/ProjectMap.tsx:861:10
+Error: the name `Lightbox` is defined multiple times
+  [90m859 |[0m   );
+  [90m860 |[0m }
+[31m[1m>[0m [90m861 |[0m [36mfunction[0m [33mLightbox[0m({
+  [90m    |[0m          [31m[1m^^^^^^^^[0m
+  [90m862 |[0m   project,
+  [90m863 |[0m   startIndex,
+  [90m864 |[0m   onClose,
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+
+
+./components/ProjectMap.tsx:970:10
+Error: the name `Marker` is defined multiple times
+  [90m968 |[0m
+  [90m969 |[0m [90m/* ─── Treasure marker ──────────────────────────────────────────────────────── */[0m
+[31m[1m>[0m [90m970 |[0m [36mfunction[0m [33mMarker[0m({
+  [90m    |[0m          [31m[1m^^^^^^[0m
+  [90m971 |[0m   project,
+  [90m972 |[0m   index,
+  [90m973 |[0m   visible,
+
+Ecmascript file had an error
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+
+ GET / 500 in 696ms (next.js: 554ms, application-code: 142ms)
+ GET / 200 in 101ms (next.js: 12ms, application-code: 88ms)
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+⨯ ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  [90m1029 |[0m               {visible && (
+  [90m1030 |[0m                 <path key={[32m`c[0m${i[32m}`[0m} d={d} stroke=[32m"white"[0m strokeOpacity=[32m"0.5"[0m strokeWidth.[32m..[0m
+[31m[1m>[0m [90m1031 |[0m               ))}
+  [90m     |[0m                [31m[1m^[0m
+  [90m1032 |[0m               {visible && (
+  [90m1033 |[0m                 <path
+  [90m1034 |[0m                   key={[32m`d[0m${i[32m}`[0m}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+
+ GET / 500 in 65ms (next.js: 43ms, application-code: 22ms)
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] Uncaught Error: ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./components/ProjectMap.tsx:1031:16)
+    at <unknown> (Error: (./components/ProjectMap.tsx:1031:16)
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] Uncaught Error: ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./components/ProjectMap.tsx:1031:16)
+    at <unknown> (Error: (./components/ProjectMap.tsx:1031:16)
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+⨯ ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  [90m1029 |[0m               {visible && (
+  [90m1030 |[0m                 <path key={[32m`c[0m${i[32m}`[0m} d={d} stroke=[32m"white"[0m strokeOpacity=[32m"0.5"[0m strokeWidth.[32m..[0m
+[31m[1m>[0m [90m1031 |[0m               ))}
+  [90m     |[0m                [31m[1m^[0m
+  [90m1032 |[0m               {visible && (
+  [90m1033 |[0m                 <path
+  [90m1034 |[0m                   key={[32m`d[0m${i[32m}`[0m}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+
+ GET / 500 in 28ms (next.js: 16ms, application-code: 12ms)
+[browser] Uncaught Error: ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component]
+
+
+    at <unknown> (Error: ./components/ProjectMap.tsx:1031:16)
+    at <unknown> (Error: (./components/ProjectMap.tsx:1031:16)
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+✓ Compiled in 228ms
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+[browser] ./components/ProjectMap.tsx:1031:16
+Error: Expected '</', got ')'
+  1029 |               {visible && (
+  1030 |                 <path key={`c${i}`} d={d} stroke="white" strokeOpacity="0.5" strokeWidth...
+> 1031 |               ))}
+       |                ^
+  1032 |               {visible && (
+  1033 |                 <path
+  1034 |                   key={`d${i}`}
+
+Parsing ecmascript source code failed
+
+Import traces:
+  Client Component Browser:
+    ./components/ProjectMap.tsx [Client Component Browser]
+    ./app/page.tsx [Client Component Browser]
+    ./app/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./components/ProjectMap.tsx [Client Component SSR]
+    ./app/page.tsx [Client Component SSR]
+    ./app/page.tsx [Server Component] 
+ GET / 200 in 57ms (next.js: 18ms, application-code: 39ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 31ms (next.js: 10ms, application-code: 20ms)
+✓ Compiled in 131ms
+ GET / 200 in 75ms (next.js: 5ms, application-code: 70ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+✓ Compiled in 158ms
+ GET / 200 in 48ms (next.js: 15ms, application-code: 32ms)
+ GET / 200 in 25ms (next.js: 9ms, application-code: 16ms)
+✓ Compiled in 105ms
+ GET / 200 in 24ms (next.js: 9ms, application-code: 15ms)
+✓ Compiled in 95ms
+ GET / 200 in 65ms (next.js: 6ms, application-code: 60ms)
+ GET / 200 in 25ms (next.js: 10ms, application-code: 15ms)
+✓ Compiled in 98ms
+ GET / 200 in 23ms (next.js: 9ms, application-code: 15ms)
+✓ Compiled in 93ms
+ GET / 200 in 59ms (next.js: 4ms, application-code: 55ms)
+ GET / 200 in 75ms (next.js: 7ms, application-code: 69ms)
+ GET / 200 in 84ms (next.js: 7ms, application-code: 78ms)
+ GET / 200 in 73ms (next.js: 6ms, application-code: 66ms)
+ GET / 200 in 81ms (next.js: 8ms, application-code: 73ms)
+ GET / 200 in 93ms (next.js: 10ms, application-code: 83ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 85ms (next.js: 7ms, application-code: 78ms)
+✓ Compiled in 168ms
+ GET / 200 in 32ms (next.js: 15ms, application-code: 18ms)
+ GET / 200 in 43ms (next.js: 12ms, application-code: 31ms)
+ GET / 200 in 76ms (next.js: 6ms, application-code: 70ms)
+ GET / 200 in 90ms (next.js: 5ms, application-code: 85ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 80ms (next.js: 6ms, application-code: 74ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 77ms (next.js: 7ms, application-code: 70ms)
+ GET / 200 in 69ms (next.js: 6ms, application-code: 63ms)
+✓ Compiled in 809ms
+ GET / 200 in 35ms (next.js: 15ms, application-code: 20ms)
+✓ Compiled in 145ms
+ GET / 200 in 27ms (next.js: 11ms, application-code: 16ms)
+✓ Compiled in 139ms
+ GET / 200 in 27ms (next.js: 11ms, application-code: 17ms)
+✓ Compiled in 126ms
+ GET / 200 in 167ms (next.js: 11ms, application-code: 156ms)
+ GET / 200 in 85ms (next.js: 7ms, application-code: 78ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
+ GET / 200 in 78ms (next.js: 7ms, application-code: 71ms)
+ GET / 200 in 77ms (next.js: 7ms, application-code: 70ms)
+ GET / 200 in 32ms (next.js: 12ms, application-code: 19ms)
+✓ Compiled in 128ms
+ GET / 200 in 76ms (next.js: 7ms, application-code: 69ms)
+ GET / 200 in 85ms (next.js: 9ms, application-code: 75ms)
+ GET / 200 in 90ms (next.js: 8ms, application-code: 82ms)
+ GET / 200 in 26ms (next.js: 10ms, application-code: 16ms)
+✓ Compiled in 100ms
+ GET / 200 in 118ms (next.js: 7ms, application-code: 111ms)
+✓ Compiled in 106ms
+ GET / 200 in 40ms (next.js: 14ms, application-code: 26ms)
+ GET / 200 in 26ms (next.js: 10ms, application-code: 16ms)
+✓ Compiled in 124ms
+ GET / 200 in 26ms (next.js: 11ms, application-code: 15ms)
+✓ Compiled in 139ms
+[browser] Updating a style property during rerender (transition) when a conflicting property is set (transitionDuration) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values. 
+[browser] Updating a style property during rerender (transition) when a conflicting property is set (transitionProperty) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values. 
+ GET / 200 in 75ms (next.js: 7ms, application-code: 68ms)
+[browser] Updating a style property during rerender (transition) when a conflicting property is set (transitionDuration) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values. 
+[browser] Updating a style property during rerender (transition) when a conflicting property is set (transitionProperty) can lead to styling bugs. To avoid this, don't mix shorthand and non-shorthand properties for the same value; instead, replace the shorthand with separate values. 
+ GET / 200 in 27ms (next.js: 11ms, application-code: 16ms)
+✓ Compiled in 99ms
+ GET / 200 in 93ms (next.js: 18ms, application-code: 75ms)
+ GET / 200 in 74ms (next.js: 6ms, application-code: 68ms)
+[browser] THREE.Clock: This module has been deprecated. Please use THREE.Timer instead.
