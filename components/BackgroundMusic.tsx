@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { useMusicContext } from "@/components/MusicContext";
 
 export default function BackgroundMusic() {
   const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -9,10 +10,14 @@ export default function BackgroundMusic() {
   const [isPlaying, setIsPlaying] = useState(true);
   const [isMuted, setIsMuted] = useState(false);
   const userPausedRef = useRef(false);
+  const { registerBgAudio } = useMusicContext();
 
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
+
+    // Hand the audio element to MusicContext so AITerminal can pause/resume it
+    registerBgAudio(audio);
 
     audio.volume = 0.55;
     audio.loop = true;
@@ -141,7 +146,8 @@ export default function BackgroundMusic() {
       />
 
       {/* Floating Ambient Music Controller */}
-      <div className="fixed bottom-6 left-6 z-50 flex items-center gap-2 select-none">
+      {/* On mobile, shift above the AI terminal toggle button (bottom-20) so they don't overlap */}
+      <div className="fixed bottom-20 sm:bottom-6 left-6 z-50 flex items-center gap-2 select-none">
         <button
           ref={buttonRef}
           onClick={togglePlay}

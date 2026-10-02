@@ -1,0 +1,32 @@
+{
+  "project_type": "Next.js 16 App Router single-page portfolio with 3D/WebGL, frame-by-frame animations, background music, logo carousel, bento grid, project map, and a game sub-route",
+  "language": "TypeScript",
+  "build_system": "Next.js 16.3.8 with Turbopack available; no custom webpack config currently in next.config.ts (empty NextConfig object). Uses @tailwindcss/postcss v4 (Tailwind v4 — CSS-first config with @import 'tailwindcss' in globals.css, no tailwind.config.js). All custom animations defined inline in globals.css.",
+  "test_framework": "None — no test framework installed",
+  "build_command": "npm run build (runs 'next build') from c:\\Users\\lordr\\Downloads\\portfolio-3d",
+  "test_command": "npm run build (no test suite; build must succeed with zero errors)",
+  "verification_instructions": "Run 'npm run build' from c:\\Users\\lordr\\Downloads\\portfolio-3d. Build must complete with Exit Code 0 and no TypeScript/ESLint errors. Then optionally run 'npm run start' and verify the page loads on localhost:3000.",
+  "snapshot_or_generated_files": null,
+  "environment_constraints": "Hosted on Vercel free tier — no server-side compute budget to spare, so do not add SSR data fetching or API routes. Do NOT run dev server. The workspace root is c:\\Users\\lordr\\Downloads\\portfolio-3d. All relative paths in shell commands must be resolved from this root.",
+  "contribution_requirements": "AGENTS.md instructs: read node_modules/next/dist/docs/ before writing any Next.js code. next/dynamic ssr:false is only supported in Client Components. All heavy components (3D, canvas, WebGL, audio) must stay as Client Components with 'use client'. No TypeScript errors allowed.",
+  "key_patterns": "1) All components are 'use client' — no Server Components in this project. 2) Tailwind v4 is used: utility classes work normally but no tailwind.config.js exists. 3) next/dynamic is available for lazy-loading. 4) LayoutProps<'/'> is a custom type used in layout.tsx — do not remove it. 5) globals.css uses @import 'tailwindcss' not @tailwind directives. 6) Public assets are in /public — 300 PNG frames in /public/frames_300/ and /public/splash_frames_300/. 7) ProjectMap uses @react-three/fiber Canvas and useGLTF from @react-three/drei — must stay ssr:false.",
+  "relevant_files": [
+    "app/page.tsx",
+    "app/layout.tsx",
+    "app/globals.css",
+    "app/game/page.tsx",
+    "next.config.ts",
+    "components/ScrollSequence.tsx",
+    "components/ProjectMap.tsx",
+    "components/BackgroundMusic.tsx",
+    "components/SplashWrapper.tsx",
+    "components/SplashScreen.tsx",
+    "components/AITerminal.tsx",
+    "components/BentoGrid.tsx",
+    "components/LogoCarousel.tsx",
+    "components/game/FairytaleWorld.tsx",
+    "components/game/Obstacle.tsx",
+    "components/game/Player.tsx"
+  ],
+  "directory_structure": "app/ — Next.js App Router pages (page.tsx = main, layout.tsx = root layout, game/page.tsx = WebGL game, globals.css); components/ — all UI components as Client Components; components/game/ — Three.js game components; data/ — projects.ts with PROJECTS array; public/ — static assets including /frames_300/ (300 PNGs for ScrollSequence), /splash_frames_300/ (300 PNGs for SplashScreen), /audio/music.weba, /models/stained_glass_butterfly.glb; .agents/tasks/ — workflow artifacts (outside worktree commits)"
+}

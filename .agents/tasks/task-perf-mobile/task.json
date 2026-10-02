@@ -1,0 +1,7 @@
+{
+  "task_id": "task-perf-mobile",
+  "task_description": "Performance optimization and mobile UI overhaul of a Next.js 16 portfolio site. Priority 1: make the site lag-free on low-end hardware. Priority 2: improve overall mobile UI. Priority 3: overhaul the Chart Your Course / ProjectMap section specifically for mobile.",
+  "status": "pending",
+  "feature_order": ["FEAT-001", "FEAT-002", "FEAT-003"],
+  "blocked_reason": null
+}

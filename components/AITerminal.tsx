@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Terminal, X, Minimize2, Maximize2, Send, PlayCircle, Loader2 } from 'lucide-react';
+import { useMusicContext } from '@/components/MusicContext';
 
 interface Message {
   role: 'user' | 'assistant' | 'system';
@@ -36,6 +37,7 @@ export default function AITerminal() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const router = useRouter();
+  const { pauseBgMusic, resumeBgMusic } = useMusicContext();
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -52,6 +54,8 @@ export default function AITerminal() {
       } else {
         audioRef.current.src = audioState.url;
       }
+      // Pause the site's background music before AI song starts
+      pauseBgMusic();
       audioRef.current.play();
     }
   }, [audioState.url]);
@@ -61,7 +65,9 @@ export default function AITerminal() {
       if (audioState.isPlaying) {
         audioRef.current.pause();
         setAudioState(prev => ({ ...prev, isPlaying: false }));
+        resumeBgMusic();
       } else {
+        pauseBgMusic();
         audioRef.current.play();
         setAudioState(prev => ({ ...prev, isPlaying: true }));
       }
@@ -71,8 +77,14 @@ export default function AITerminal() {
   useEffect(() => {
     if (audioRef.current) {
       audioRef.current.onplay = () => setAudioState(prev => ({ ...prev, isPlaying: true }));
-      audioRef.current.onpause = () => setAudioState(prev => ({ ...prev, isPlaying: false }));
-      audioRef.current.onended = () => setAudioState(prev => ({ ...prev, isPlaying: false, url: null }));
+      audioRef.current.onpause = () => {
+        setAudioState(prev => ({ ...prev, isPlaying: false }));
+        resumeBgMusic();
+      };
+      audioRef.current.onended = () => {
+        setAudioState(prev => ({ ...prev, isPlaying: false, url: null }));
+        resumeBgMusic();
+      };
     }
   }, [audioRef.current]);
 
