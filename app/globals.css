@@ -250,3 +250,16 @@ body {
   overflow: hidden;
 }
 
+/* ── Touch interaction optimisations ──────────────────────── */
+/* Eliminate 300ms tap delay on iOS/Android */
+button, a, [role="button"] {
+  touch-action: manipulation;
+}
+
+/* ── Mobile: hide glass popup overlays to prevent overflow clipping ── */
+@media (max-width: 640px) {
+  .glass-popup-tier,
+  .glass-popup-content {
+    display: none;
+  }
+}

@@ -12,6 +12,7 @@ export default function Home() {
   const [isHovering, setIsHovering] = useState(false);
   // Detect touch/pointer:coarse devices — no mouse reveal on these
   const [isMobile, setIsMobile] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const rafIdRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -128,9 +129,59 @@ export default function Home() {
           <div className="flex items-center gap-8 text-xs tracking-widest uppercase font-medium">
             <a href="#ecosystem" className="hidden sm:block text-gray-400 hover:text-white transition-colors">Projects</a>
             <a href="#ecosystem" className="hidden sm:block text-gray-400 hover:text-white transition-colors">Ecosystem</a>
-            <a href="https://github.com/voidbornfr" target="_blank" rel="noopener noreferrer" className="text-white hover:text-gray-300 transition-colors">GitHub</a>
+            <a href="https://github.com/voidbornfr" target="_blank" rel="noopener noreferrer" className="hidden sm:block text-white hover:text-gray-300 transition-colors">GitHub</a>
+
+            {/* Hamburger button — mobile only */}
+            <button
+              onClick={() => setMenuOpen((v) => !v)}
+              aria-label={menuOpen ? "Close menu" : "Open menu"}
+              aria-expanded={menuOpen}
+              className="sm:hidden flex flex-col justify-center items-center w-11 h-11 gap-[5px] focus:outline-none"
+            >
+              <span
+                className={`block w-6 h-[1.5px] bg-white transition-transform duration-300 origin-center ${menuOpen ? "rotate-45 translate-y-[6.5px]" : ""}`}
+              />
+              <span
+                className={`block w-6 h-[1.5px] bg-white transition-opacity duration-300 ${menuOpen ? "opacity-0" : ""}`}
+              />
+              <span
+                className={`block w-6 h-[1.5px] bg-white transition-transform duration-300 origin-center ${menuOpen ? "-rotate-45 -translate-y-[6.5px]" : ""}`}
+              />
+            </button>
           </div>
         </nav>
+
+        {/* Mobile menu overlay — slide down when open */}
+        <div
+          className={`sm:hidden absolute left-0 right-0 z-50 bg-black/95 backdrop-blur-xl border-b border-white/10 transition-all duration-300 ease-in-out overflow-hidden ${menuOpen ? "max-h-56 opacity-100" : "max-h-0 opacity-0"}`}
+          style={{ top: "72px" }}
+        >
+          <div className="flex flex-col px-8 py-4 gap-1 text-xs tracking-widest uppercase font-medium">
+            <a
+              href="#ecosystem"
+              onClick={() => setMenuOpen(false)}
+              className="py-3 text-gray-300 hover:text-white transition-colors border-b border-white/5"
+            >
+              Projects
+            </a>
+            <a
+              href="#ecosystem"
+              onClick={() => setMenuOpen(false)}
+              className="py-3 text-gray-300 hover:text-white transition-colors border-b border-white/5"
+            >
+              Ecosystem
+            </a>
+            <a
+              href="https://github.com/voidbornfr"
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => setMenuOpen(false)}
+              className="py-3 text-white hover:text-gray-300 transition-colors"
+            >
+              GitHub
+            </a>
+          </div>
+        </div>
 
         {/* Main Hero Section - Super Minimal */}
         <section className="flex-1 flex flex-col justify-center max-w-2xl mt-12 lg:mt-0">
@@ -147,8 +198,8 @@ export default function Home() {
           </p>
 
           <div className="flex items-center gap-8">
-            <a href="#ecosystem" className="group flex items-center gap-4 text-xs tracking-widest uppercase font-medium">
-              <span className="w-8 h-[1px] bg-white group-hover:w-12 transition-all duration-300"></span>
+            <a href="#ecosystem" className="group flex items-center gap-6 text-xs tracking-widest uppercase font-medium">
+              <span className="w-10 h-[2px] bg-white group-hover:w-14 transition-all duration-300"></span>
               Explore Ecosystem
             </a>
           </div>
@@ -159,9 +210,9 @@ export default function Home() {
           <p className="text-xs tracking-widest text-gray-500 uppercase">
             Ecosystem
           </p>
-          <div className="flex flex-wrap items-center gap-8 md:gap-12 opacity-60">
+          <div className="flex overflow-x-auto md:flex-wrap items-center gap-8 md:gap-12 opacity-60 pb-1 md:pb-0">
             {['Voidverse', 'VoidAnime', 'Voidloop', 'Voidcrafts', 'Void-Files', 'VoidDrops'].map((brand, i) => (
-              <a key={i} href="#ecosystem" className="text-xs tracking-widest uppercase text-white font-medium hover:text-gray-300 transition-colors cursor-pointer">
+              <a key={i} href="#ecosystem" className="text-xs tracking-widest uppercase text-white font-medium hover:text-gray-300 transition-colors cursor-pointer flex-shrink-0">
                 {brand}
               </a>
             ))}

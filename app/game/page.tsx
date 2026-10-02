@@ -22,10 +22,17 @@ function GameScene({
   isPlaying,
   onGameOver,
   onScoreUpdate,
+  onControlsReady,
 }: {
   isPlaying: boolean;
   onGameOver: () => void;
   onScoreUpdate: (score: number) => void;
+  onControlsReady?: (controls: {
+    moveLeft: () => void;
+    moveRight: () => void;
+    jump: () => void;
+    roll: () => void;
+  }) => void;
 }) {
   const [lane, setLane] = useState(0); // -1, 0, 1
   const [isJumping, setIsJumping] = useState(false);
@@ -47,6 +54,26 @@ function GameScene({
   
   const jumpTimer = useRef<NodeJS.Timeout | null>(null);
   const rollTimer = useRef<NodeJS.Timeout | null>(null);
+
+  // Expose touch control handlers to parent
+  useEffect(() => {
+    if (!onControlsReady) return;
+    const moveLeft  = () => { if (!isPlaying) return; setLane((l) => Math.max(-1, l - 1)); };
+    const moveRight = () => { if (!isPlaying) return; setLane((l) => Math.min(1, l + 1)); };
+    const jump = () => {
+      if (!isPlaying || isJumping || isRolling) return;
+      setIsJumping(true);
+      if (jumpTimer.current) clearTimeout(jumpTimer.current);
+      jumpTimer.current = setTimeout(() => setIsJumping(false), 800);
+    };
+    const roll = () => {
+      if (!isPlaying || isJumping || isRolling) return;
+      setIsRolling(true);
+      if (rollTimer.current) clearTimeout(rollTimer.current);
+      rollTimer.current = setTimeout(() => setIsRolling(false), 800);
+    };
+    onControlsReady({ moveLeft, moveRight, jump, roll });
+  }, [onControlsReady, isPlaying, isJumping, isRolling]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -162,11 +189,36 @@ export default function GamePage() {
   const [score, setScore] = useState(0);
   const [highScore, setHighScore] = useState(0);
   const [gameKey, setGameKey] = useState(0);
+  const [isTouchDevice, setIsTouchDevice] = useState(false);
+
+  // Stable ref to control callbacks exposed by GameScene
+  const controlsRef = useRef<{
+    moveLeft: () => void;
+    moveRight: () => void;
+    jump: () => void;
+    roll: () => void;
+  } | null>(null);
 
   useEffect(() => {
     // Load high score on mount
     const saved = localStorage.getItem("voidRunnerHighScore");
     if (saved) setHighScore(parseInt(saved, 10));
+  }, []);
+
+  useEffect(() => {
+    // Detect touch devices
+    if ("ontouchstart" in window) {
+      setIsTouchDevice(true);
+    }
+  }, []);
+
+  const handleControlsReady = useCallback((controls: {
+    moveLeft: () => void;
+    moveRight: () => void;
+    jump: () => void;
+    roll: () => void;
+  }) => {
+    controlsRef.current = controls;
   }, []);
 
   const startGame = () => {
@@ -204,15 +256,16 @@ export default function GamePage() {
       </div>
 
       {(!isPlaying || gameOver) && (
-        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm">
-          <h1 className="text-5xl font-bold mb-4 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500">
+        <div className="absolute inset-0 z-20 flex flex-col items-center justify-center bg-black/80 backdrop-blur-sm px-6">
+          <h1 className="text-3xl sm:text-5xl font-bold mb-4 tracking-widest text-transparent bg-clip-text bg-gradient-to-r from-white via-gray-300 to-gray-500 text-center">
             {gameOver ? "GAME OVER" : "VOID RUNNER"}
           </h1>
-          {gameOver && <p className="mb-8 text-xl text-gray-400">Final Score: {score}</p>}
+          {gameOver && <p className="mb-8 text-xl text-gray-400 text-center">Final Score: {score}</p>}
           {!gameOver && (
-            <p className="mb-8 text-sm text-gray-500 max-w-sm text-center">
-              Use ARROW KEYS or WASD to move left/right. <br />
-              UP to Jump, DOWN to Roll.
+            <p className="mb-8 text-sm text-gray-500 max-w-sm text-center px-6">
+              {isTouchDevice
+                ? "Use the on-screen D-pad to move left/right, jump, and roll."
+                : "Use ARROW KEYS or WASD to move left/right. UP to Jump, DOWN to Roll."}
             </p>
           )}
           <button
@@ -231,8 +284,55 @@ export default function GamePage() {
       >
         {/* Vibrant Fantasy Sky Background */}
         <color attach="background" args={["#87CEEB"]} />
-        <GameScene key={gameKey} isPlaying={isPlaying} onGameOver={handleGameOver} onScoreUpdate={setScore} />
+        <GameScene
+          key={gameKey}
+          isPlaying={isPlaying}
+          onGameOver={handleGameOver}
+          onScoreUpdate={setScore}
+          onControlsReady={handleControlsReady}
+        />
       </Canvas>
+
+      {/* Touch D-pad — visible only on touch devices */}
+      {isTouchDevice && (
+        <div className="absolute bottom-8 left-0 right-0 z-10 flex items-end justify-between px-6 pointer-events-none">
+          {/* Left / Right cluster */}
+          <div className="flex items-center gap-3 pointer-events-auto">
+            <button
+              onTouchStart={(e) => { e.preventDefault(); controlsRef.current?.moveLeft(); }}
+              className="w-14 h-14 rounded-full bg-black/60 border border-white/30 backdrop-blur flex items-center justify-center text-white text-xl active:bg-white/20 transition-colors"
+              aria-label="Move left"
+            >
+              ◀
+            </button>
+            <button
+              onTouchStart={(e) => { e.preventDefault(); controlsRef.current?.moveRight(); }}
+              className="w-14 h-14 rounded-full bg-black/60 border border-white/30 backdrop-blur flex items-center justify-center text-white text-xl active:bg-white/20 transition-colors"
+              aria-label="Move right"
+            >
+              ▶
+            </button>
+          </div>
+
+          {/* Jump / Roll cluster */}
+          <div className="flex items-center gap-3 pointer-events-auto">
+            <button
+              onTouchStart={(e) => { e.preventDefault(); controlsRef.current?.roll(); }}
+              className="w-14 h-14 rounded-full bg-black/60 border border-white/30 backdrop-blur flex items-center justify-center text-white text-xs font-bold active:bg-white/20 transition-colors"
+              aria-label="Roll"
+            >
+              ROLL
+            </button>
+            <button
+              onTouchStart={(e) => { e.preventDefault(); controlsRef.current?.jump(); }}
+              className="w-14 h-14 rounded-full bg-black/60 border border-white/30 backdrop-blur flex items-center justify-center text-white text-xl active:bg-white/20 transition-colors"
+              aria-label="Jump"
+            >
+              ▲
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

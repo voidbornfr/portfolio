@@ -1,0 +1,40 @@
+{
+  "id": "FEAT-002",
+  "type": "feat",
+  "description": "Global mobile UI improvements across all components. Adds a hamburger menu to the navbar (currently links are hidden on mobile with no menu at all), improves touch targets to 44px minimum, fixes BentoGrid card min-heights on small screens, improves ScrollSequence text overlay legibility on mobile, adds game touch controls, and polishes spacing/typography across breakpoints. Independent of FEAT-001 (different files) but should be applied after FEAT-001 since FEAT-001 may touch app/page.tsx.",
+  "status": "completed",
+  "steps": [
+    "1. app/page.tsx — Navbar hamburger menu: add a useState for menuOpen, a hamburger button (3 lines icon) visible only on mobile (sm:hidden), and a slide-down mobile menu overlay with the hidden nav links (Projects, Ecosystem, GitHub). The menu should close on link click. Use a simple CSS transition for open/close. Touch target for the hamburger button: min 44x44px. This is the MOST IMPORTANT mobile UI gap — the site currently has no navigation on mobile.",
+
+    "2. app/page.tsx — Hero section on mobile: the hero text 'Engineered in the shadows.' h1 uses text-4xl on mobile which is fine. But the ecosystem strip at the bottom wraps poorly — change the brand list from flex-wrap to a scrollable row on mobile: add overflow-x-auto and remove flex-wrap for screens smaller than md. This keeps the bottom strip tidy.",
+
+    "3. app/page.tsx — The Explore Ecosystem CTA link at the bottom of the hero uses a very thin 1px white line as an icon. On mobile this is nearly invisible. Increase the gap-4 to gap-6 and the line from w-8 h-[1px] to w-10 h-[2px] for better visibility.",
+
+    "4. components/ScrollSequence.tsx — The text overlays use absolute positioning with percentage offsets. On mobile, the rotated mono label ('Void // Systems') at top-left and the bottom-right rotated hint ('Scroll to initiate') look cramped. Fix: hide the rotated labels on mobile using 'hidden md:block'. The bottom-left and top-right text blocks are the important ones — ensure they use text-2xl max on mobile (already text-3xl md:text-5xl — good). No changes needed to the canvas itself.",
+
+    "5. components/BentoGrid.tsx — On mobile all cards are col-span-12, but min-h values like min-h-[620px] and min-h-[520px] create very tall cards on small screens. Change hero card to min-h-[400px] sm:min-h-[520px] md:min-h-[620px], and other cards to min-h-[320px] sm:min-h-[420px] md:min-h-[460px]. The glass popup tiers (glass-tier-1, glass-tier-2, glass-popup-content) use position:absolute with bottom/left negative percentages — these are fine on desktop but on mobile they clip. Add a media query in globals.css: @media (max-width: 640px) { .glass-popup-tier, .glass-popup-content { display: none; } } — on mobile, only the resting title overlay is shown (which is already nicely styled).",
+
+    "6. components/BentoGrid.tsx — The BentoGrid section header has flex-col md:flex-row. On mobile the GitHub/YouTube buttons wrap to their own row but use px-6 py-2.5 which creates fine touch targets. Leave as-is. However, the grid gap is gap-4 md:gap-5 — increase mobile gap to gap-3 for slightly better breathing room.",
+
+    "7. app/game/page.tsx — Add touch controls. Currently only keyboard controls work. Add an on-screen D-pad for mobile: four buttons (left, right, up/jump, down/roll) rendered in a fixed bottom overlay, visible only on touch devices. Use onTouchStart to trigger the same lane/jump/roll logic as keyboard handlers. Each button must be at least 56x56px for comfortable touch targets. Show this overlay only when ('ontouchstart' in window) — detect this in a useEffect and store in state.",
+
+    "8. app/game/page.tsx — The game over / start screen has text-5xl h1 and paragraph text. On mobile this clips. Add responsive text: text-3xl sm:text-5xl for the h1, and ensure the description paragraph has px-6 on mobile.",
+
+    "9. components/AITerminal.tsx — The terminal is positioned bottom-6 right-6 with w-[calc(100vw-3rem)] on mobile. This is already responsive. However, the height is 70vh on mobile which can cover most of the screen. Reduce to h-[55vh] sm:h-[550px] so it doesn't cover the music player. Also ensure the input area has a minimum font-size of 16px to prevent iOS auto-zoom: add text-base (16px) to the input element instead of text-sm.",
+
+    "10. globals.css — Add touch-action: manipulation to buttons and interactive elements to eliminate the 300ms tap delay on iOS: add 'button, a, [role=\"button\"] { touch-action: manipulation; }' at the bottom of globals.css."
+  ],
+  "acceptance_criteria": [
+    "npm run build completes with exit code 0",
+    "Navbar has a visible hamburger button on mobile (visible at <640px) that opens a menu with navigation links",
+    "BentoGrid cards have responsive min-heights that don't exceed the viewport on mobile",
+    "Glass popup tiers are hidden on mobile (no overflow clipping)",
+    "game/page.tsx shows on-screen touch controls on touch devices",
+    "AITerminal input uses text-base (16px) to prevent iOS auto-zoom"
+  ],
+  "verification": [
+    "npm run build from c:\\Users\\lordr\\Downloads\\portfolio-3d — must exit 0 with no errors"
+  ],
+  "blocked_reason": null,
+  "findings": "All 10 steps implemented and build passes (exit 0). Hamburger menu added to navbar with smooth CSS open/close transition and 44px+ touch target. Ecosystem strip converted to horizontal scroll on mobile. CTA line widened from 1px/w-8 to 2px/w-10. ScrollSequence rotated mono labels hidden on mobile with hidden md:block. BentoGrid hero card min-height reduced to min-h-[400px] sm:min-h-[520px] md:min-h-[620px]; other cards use min-h-[320px] responsive steps. Glass popup tiers hidden on mobile via media query in globals.css. Grid gap changed to gap-3 md:gap-5. Game page has on-screen D-pad (4 buttons, 56x56px) revealed via isTouchDevice state + ontouchstart detection; controls plumbed through onControlsReady callback from GameScene. Game start/over h1 is text-3xl sm:text-5xl; description has px-6. AITerminal height reduced to h-[55vh] sm:h-[550px]; input changed from text-sm to text-base (16px). touch-action: manipulation added to button/a/[role=button] in globals.css."
+}

@@ -441,13 +441,13 @@ export default function BentoGrid() {
             Row 4 : VoidX Web  (4) + Voidverse API (4) + GitHub (4)
             Row 5 : YouTube (full 12)
         ═══════════════════════════════════════════════════════════════ */}
-        <div className="grid grid-cols-12 gap-4 md:gap-5">
+        <div className="grid grid-cols-12 gap-3 md:gap-5">
 
           {/* ── Row 1: Voidverse — hero full-width ────────── */}
           <ProjectCard
             project={proj["voidverse"]}
             colSpan="col-span-12"
-            minH="min-h-[520px] md:min-h-[620px]"
+            minH="min-h-[400px] sm:min-h-[520px] md:min-h-[620px]"
             hero
             interval={4000}
           />
@@ -456,13 +456,13 @@ export default function BentoGrid() {
           <ProjectCard
             project={proj["voidanime-desktop"]}
             colSpan="col-span-12 md:col-span-7"
-            minH="min-h-[480px]"
+            minH="min-h-[320px] sm:min-h-[420px] md:min-h-[460px]"
             interval={2800}
           />
           <ProjectCard
             project={proj["voidloop"]}
             colSpan="col-span-12 md:col-span-5"
-            minH="min-h-[480px]"
+            minH="min-h-[320px] sm:min-h-[420px] md:min-h-[460px]"
             interval={3200}
           />
 
@@ -470,19 +470,19 @@ export default function BentoGrid() {
           <ProjectCard
             project={proj["voidcrafts"]}
             colSpan="col-span-12 md:col-span-5"
-            minH="min-h-[460px]"
+            minH="min-h-[320px] sm:min-h-[420px] md:min-h-[460px]"
             interval={3600}
           />
           <ProjectCard
             project={proj["void-files"]}
             colSpan="col-span-12 md:col-span-4"
-            minH="min-h-[460px]"
+            minH="min-h-[320px] sm:min-h-[420px] md:min-h-[460px]"
             interval={3000}
           />
           <ProjectCard
             project={proj["voiddrops"]}
             colSpan="col-span-12 md:col-span-3"
-            minH="min-h-[460px]"
+            minH="min-h-[320px] sm:min-h-[420px] md:min-h-[460px]"
             interval={3400}
           />
 
@@ -490,19 +490,19 @@ export default function BentoGrid() {
           <ProjectCard
             project={proj["voidx-web"]}
             colSpan="col-span-12 md:col-span-3"
-            minH="min-h-[440px]"
+            minH="min-h-[320px] sm:min-h-[400px] md:min-h-[440px]"
             interval={4500}
           />
           <ProjectCard
             project={proj["voidverse-api"]}
             colSpan="col-span-12 md:col-span-5"
-            minH="min-h-[440px]"
+            minH="min-h-[320px] sm:min-h-[400px] md:min-h-[440px]"
             interval={4500}
           />
           <ProjectCard
             project={proj["github"]}
             colSpan="col-span-12 md:col-span-4"
-            minH="min-h-[440px]"
+            minH="min-h-[320px] sm:min-h-[400px] md:min-h-[440px]"
             interval={9999999}
           />
 

@@ -162,7 +162,7 @@ export default function AITerminal() {
     <div className={`fixed z-50 transition-all duration-300 ease-in-out ${
       isMinimized 
         ? 'bottom-6 right-6 w-[calc(100vw-3rem)] sm:w-80 h-14' 
-        : 'bottom-6 right-6 w-[calc(100vw-3rem)] sm:w-[400px] h-[70vh] sm:h-[550px]'
+        : 'bottom-6 right-6 w-[calc(100vw-3rem)] sm:w-[400px] h-[55vh] sm:h-[550px]'
     }`}>
       <div className="flex flex-col h-full bg-black/95 backdrop-blur-xl border border-zinc-800/50 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(255,255,255,0.05)]">
         
@@ -238,7 +238,7 @@ export default function AITerminal() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Enter command..."
-                  className="w-full bg-zinc-950 border border-zinc-800/30 rounded text-zinc-100 placeholder-zinc-700/40 text-sm font-mono pl-8 pr-10 py-2 focus:outline-none focus:border-zinc-500/50 transition-colors"
+                  className="w-full bg-zinc-950 border border-zinc-800/30 rounded text-zinc-100 placeholder-zinc-700/40 text-base font-mono pl-8 pr-10 py-2 focus:outline-none focus:border-zinc-500/50 transition-colors"
                 />
                 <button 
                   type="submit" 

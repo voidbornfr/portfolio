@@ -221,7 +221,7 @@ export default function ScrollSequence() {
         >
           <div className="relative w-full h-full p-6 md:p-14 select-none">
             {/* Top-left: vertical mono label */}
-            <div className="absolute top-[14%] left-[5%] md:left-[7%] -rotate-90 origin-top-left">
+            <div className="hidden md:block absolute top-[14%] left-[5%] md:left-[7%] -rotate-90 origin-top-left">
               <p className="text-[9px] md:text-[11px] tracking-[0.55em] text-gray-400 uppercase font-mono whitespace-nowrap">
                 Void // Systems
               </p>
@@ -262,7 +262,7 @@ export default function ScrollSequence() {
             </div>
 
             {/* Bottom-right: vertical hint */}
-            <div className="absolute bottom-[8%] right-[5%] md:right-[7%] rotate-90 origin-bottom-right">
+            <div className="hidden md:block absolute bottom-[8%] right-[5%] md:right-[7%] rotate-90 origin-bottom-right">
               <p className="text-[8px] tracking-[0.45em] text-gray-400 uppercase font-mono whitespace-nowrap">
                 Scroll to initiate
               </p>
