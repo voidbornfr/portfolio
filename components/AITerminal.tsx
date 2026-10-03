@@ -163,18 +163,19 @@ export default function AITerminal() {
     return (
       <button 
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 bg-black/80 backdrop-blur-md border border-zinc-800/50 text-zinc-400 p-4 rounded-full hover:bg-zinc-900/40 hover:text-zinc-300 transition-all duration-300 shadow-[0_0_15px_rgba(255,255,255,0.1)] group"
+        aria-label="Open AI Terminal Chat"
+        className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-[1000] bg-black/80 backdrop-blur-md border border-zinc-800/50 text-zinc-400 p-3.5 sm:p-4 rounded-full hover:bg-zinc-900/40 hover:text-zinc-300 transition-all duration-300 shadow-[0_0_20px_rgba(255,255,255,0.15)] group"
       >
-        <Terminal className="w-6 h-6 group-hover:scale-110 transition-transform" />
+        <Terminal className="w-5 h-5 sm:w-6 sm:h-6 group-hover:scale-110 transition-transform text-white" />
       </button>
     );
   }
 
   return (
-    <div className={`fixed z-50 transition-all duration-300 ease-in-out ${
+    <div className={`fixed z-[1000] transition-all duration-300 ease-in-out ${
       isMinimized 
-        ? 'bottom-6 right-6 w-[calc(100vw-3rem)] sm:w-80 h-14' 
-        : 'bottom-6 right-6 w-[calc(100vw-3rem)] sm:w-[400px] h-[55vh] sm:h-[550px]'
+        ? 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-[calc(100vw-2rem)] sm:w-80 h-14' 
+        : 'bottom-4 right-4 sm:bottom-6 sm:right-6 w-[calc(100vw-2rem)] sm:w-[400px] h-[65vh] sm:h-[550px]'
     }`}>
       <div className="flex flex-col h-full bg-black/95 backdrop-blur-xl border border-zinc-800/50 rounded-lg overflow-hidden shadow-[0_0_30px_rgba(255,255,255,0.05)]">
         

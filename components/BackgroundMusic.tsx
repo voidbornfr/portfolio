@@ -146,8 +146,8 @@ export default function BackgroundMusic() {
       />
 
       {/* Floating Ambient Music Controller */}
-      {/* On mobile, shift above the AI terminal toggle button (bottom-20) so they don't overlap */}
-      <div className="fixed bottom-20 sm:bottom-6 left-6 z-50 flex items-center gap-2 select-none">
+      {/* On mobile, positioned properly at bottom-4 left-4 */}
+      <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-40 flex items-center gap-2 select-none">
         <button
           ref={buttonRef}
           onClick={togglePlay}

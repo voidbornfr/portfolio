@@ -2,137 +2,186 @@
 
 import { useEffect, useRef, useState, useCallback } from "react";
 
-// ─── Petal burst particle ────────────────────────────────────────────────────
-interface Petal {
+// ─── Particle & Effect Interfaces ───────────────────────────────────────────
+interface Particle {
   id: number;
   x: number;
   y: number;
-  angle: number;   // radians
-  speed: number;
+  vx: number;
+  vy: number;
   size: number;
   rotation: number;
   rotationSpeed: number;
   opacity: number;
-  hue: number;     // slight colour variation
+  type: "spark" | "shard" | "orb";
+  color: string;
 }
 
-let petalIdCounter = 0;
+interface Wave {
+  id: number;
+  x: number;
+  y: number;
+  size: number;
+  opacity: number;
+}
 
-function spawnPetals(x: number, y: number): Petal[] {
-  const count = 10;
-  return Array.from({ length: count }, (_, i) => ({
-    id: ++petalIdCounter,
+interface Slash {
+  id: number;
+  x: number;
+  y: number;
+  angle: number;
+  opacity: number;
+}
+
+let idCounter = 0;
+
+function spawnClickEffects(x: number, y: number) {
+  // 1. Shockwave energy ring
+  const wave: Wave = {
+    id: ++idCounter,
     x,
     y,
-    angle: (i / count) * Math.PI * 2 + Math.random() * 0.3,
-    speed: 2.5 + Math.random() * 3,
-    size: 8 + Math.random() * 10,
-    rotation: Math.random() * 360,
-    rotationSpeed: (Math.random() - 0.5) * 12,
+    size: 15,
     opacity: 1,
-    hue: Math.random() * 30 - 15, // ±15° around base colour
-  }));
+  };
+
+  // 2. Sword slash arc streak
+  const slash: Slash = {
+    id: ++idCounter,
+    x,
+    y,
+    angle: -25 + (Math.random() - 0.5) * 20,
+    opacity: 1,
+  };
+
+  // 3. High-velocity energy particles
+  const particleCount = 18;
+  const colors = [
+    "#ffffff",
+    "#e0f2fe", // cyan-100
+    "#38bdf8", // cyan-400
+    "#a855f7", // purple-500
+    "#cbd5e1", // silver
+  ];
+
+  const particles: Particle[] = Array.from({ length: particleCount }, (_, i) => {
+    const angle = (i / particleCount) * Math.PI * 2 + Math.random() * 0.4;
+    const speed = 3 + Math.random() * 5.5;
+    return {
+      id: ++idCounter,
+      x,
+      y,
+      vx: Math.cos(angle) * speed,
+      vy: Math.sin(angle) * speed,
+      size: 6 + Math.random() * 9,
+      rotation: Math.random() * 360,
+      rotationSpeed: (Math.random() - 0.5) * 16,
+      opacity: 1,
+      type: i % 3 === 0 ? "shard" : i % 3 === 1 ? "spark" : "orb",
+      color: colors[Math.floor(Math.random() * colors.length)],
+    };
+  });
+
+  return { wave, slash, particles };
 }
 
-// ─── SVG cursor shape — sword (matches the site logo silhouette) ─────────────
-// Blade tip at top-center (hotspot = tip), cross-guard at ~60%, grip below.
-// The cursor hotspot is the blade tip so clicking feels precise.
-const CursorSVG = ({ size = 40 }: { size?: number }) => (
+// ─── Tilted Sword SVG — Matching VOID Logo Aesthetic ─────────────────────────
+// Hotspot is exact tip of the blade at (12, 4)
+const SwordSVG = ({ size = 42 }: { size?: number }) => (
   <svg
     width={size}
-    height={size * 1.6}
-    viewBox="0 0 40 64"
+    height={size * 1.5}
+    viewBox="0 0 48 72"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    style={{ filter: "drop-shadow(0 0 5px rgba(255,255,255,0.55))" }}
+    className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)] filter"
   >
-    {/* ── Blade ── tapered diamond cross-section */}
-    {/* Left edge */}
-    <path
-      d="M20 2 L14 42 L20 46 L26 42 Z"
-      fill="url(#bladeGrad)"
-      stroke="rgba(255,255,255,0.35)"
-      strokeWidth={0.6}
-    />
-    {/* Blade centre fuller (ridge line glow) */}
-    <line x1="20" y1="2" x2="20" y2="44" stroke="rgba(255,255,255,0.7)" strokeWidth={0.8} />
-
-    {/* ── Cross-guard ── */}
-    {/* Horizontal bar */}
-    <rect x="9" y="41" width="22" height="4" rx="2"
-      fill="rgba(255,255,255,0.9)"
-      stroke="rgba(255,255,255,0.4)"
-      strokeWidth={0.5}
-    />
-    {/* Small quillon tips */}
-    <ellipse cx="9"  cy="43" rx="3" ry="2" fill="rgba(255,255,255,0.7)" />
-    <ellipse cx="31" cy="43" rx="3" ry="2" fill="rgba(255,255,255,0.7)" />
-
-    {/* ── Grip ── wrapped handle */}
-    <rect x="18" y="45" width="4" height="13" rx="1.5"
-      fill="rgba(180,180,180,0.6)"
-      stroke="rgba(255,255,255,0.2)"
-      strokeWidth={0.5}
-    />
-    {/* Grip wraps */}
-    {[47, 50, 53].map(y => (
-      <line key={y} x1="17.5" y1={y} x2="22.5" y2={y}
-        stroke="rgba(255,255,255,0.35)" strokeWidth={1} />
-    ))}
-
-    {/* ── Pommel ── */}
-    <ellipse cx="20" cy="59" rx="4" ry="3"
-      fill="rgba(255,255,255,0.85)"
-      stroke="rgba(255,255,255,0.4)"
-      strokeWidth={0.5}
-    />
-
-    {/* Blade gradient definition */}
     <defs>
-      <linearGradient id="bladeGrad" x1="14" y1="2" x2="26" y2="46" gradientUnits="userSpaceOnUse">
-        <stop offset="0%"   stopColor="rgba(255,255,255,0.95)" />
-        <stop offset="45%"  stopColor="rgba(220,220,230,0.80)" />
-        <stop offset="100%" stopColor="rgba(160,160,180,0.65)" />
+      {/* Blade Gradient */}
+      <linearGradient id="bladeMainGrad" x1="12" y1="4" x2="26" y2="48" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="#ffffff" />
+        <stop offset="30%" stopColor="#f0f9ff" />
+        <stop offset="70%" stopColor="#94a3b8" />
+        <stop offset="100%" stopColor="#475569" />
+      </linearGradient>
+
+      {/* Cyber Edge Glow */}
+      <linearGradient id="edgeGlow" x1="12" y1="4" x2="12" y2="48" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.9" />
+        <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
+        <stop offset="100%" stopColor="#818cf8" stopOpacity="0.6" />
+      </linearGradient>
+
+      {/* Crossguard Metallic */}
+      <linearGradient id="guardGrad" x1="4" y1="44" x2="28" y2="50" gradientUnits="userSpaceOnUse">
+        <stop offset="0%" stopColor="#e2e8f0" />
+        <stop offset="50%" stopColor="#ffffff" />
+        <stop offset="100%" stopColor="#64748b" />
       </linearGradient>
     </defs>
+
+    {/* Group tilted -18 degrees to left around blade tip (12, 4) */}
+    <g transform="rotate(-18 12 4)">
+      {/* Blade outer glow aura */}
+      <path
+        d="M12 4 L7 44 L12 49 L17 44 Z"
+        fill="url(#edgeGlow)"
+        opacity="0.5"
+        className="blur-[1px]"
+      />
+
+      {/* Main Blade Tapered Body */}
+      <path
+        d="M12 4 L8 44 L12 48 L16 44 Z"
+        fill="url(#bladeMainGrad)"
+        stroke="rgba(255,255,255,0.8)"
+        strokeWidth="0.75"
+      />
+
+      {/* Blade Central Fuller / Energy Groove */}
+      <line
+        x1="12"
+        y1="6"
+        x2="12"
+        y2="45"
+        stroke="#ffffff"
+        strokeWidth="1.2"
+        strokeLinecap="round"
+        style={{ filter: "drop-shadow(0 0 3px #38bdf8)" }}
+      />
+      <line
+        x1="12"
+        y1="10"
+        x2="12"
+        y2="40"
+        stroke="#38bdf8"
+        strokeWidth="0.6"
+      />
+
+      {/* Winged Cyber Crossguard */}
+      <path
+        d="M2 46 C6 44, 10 44, 12 47 C14 44, 18 44, 22 46 L20 50 C16 48, 14 48, 12 50 C10 48, 8 48, 4 50 Z"
+        fill="url(#guardGrad)"
+        stroke="rgba(255,255,255,0.9)"
+        strokeWidth="0.6"
+      />
+
+      {/* Center Core Void Gem */}
+      <polygon points="12,45 14,47.5 12,50 10,47.5" fill="#38bdf8" stroke="#ffffff" strokeWidth="0.5" />
+
+      {/* Wrapped Handle Grip */}
+      <rect x="10.5" y="50" width="3" height="13" rx="1" fill="#1e293b" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" />
+      {[52.5, 55.5, 58.5, 61.5].map((y) => (
+        <line key={y} x1="10" y1={y} x2="14" y2={y} stroke="#e2e8f0" strokeWidth="0.8" />
+      ))}
+
+      {/* Pommel Crystal */}
+      <polygon points="12,63 15,66 12,69 9,66" fill="url(#guardGrad)" stroke="#ffffff" strokeWidth="0.6" />
+      <circle cx="12" cy="66" r="1.2" fill="#38bdf8" />
+    </g>
   </svg>
 );
 
-// Single petal shape for burst particles
-const PetalShape = ({
-  size,
-  hue,
-  opacity,
-  rotation,
-}: {
-  size: number;
-  hue: number;
-  opacity: number;
-  rotation: number;
-}) => (
-  <svg
-    width={size}
-    height={size}
-    viewBox="0 0 24 24"
-    style={{
-      transform: `rotate(${rotation}deg)`,
-      opacity,
-      filter: `drop-shadow(0 0 3px rgba(255,255,255,0.5))`,
-    }}
-  >
-    <ellipse
-      cx={12}
-      cy={12}
-      rx={6}
-      ry={11}
-      fill={`hsl(${30 + hue}, 90%, 88%)`}
-      stroke="rgba(255,255,255,0.4)"
-      strokeWidth={0.5}
-    />
-  </svg>
-);
-
-// ─── Main component ──────────────────────────────────────────────────────────
 export default function CustomCursor() {
   const posRef = useRef({ x: -100, y: -100 });
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -140,30 +189,32 @@ export default function CustomCursor() {
   const rafRef = useRef<number>(0);
   const trailPos = useRef({ x: -100, y: -100 });
 
-  const [petals, setPetals] = useState<Petal[]>([]);
+  const [waves, setWaves] = useState<Wave[]>([]);
+  const [slashes, setSlashes] = useState<Slash[]>([]);
+  const [particles, setParticles] = useState<Particle[]>([]);
   const [isHovering, setIsHovering] = useState(false);
-  // Hide on touch-only devices
+  const [isClicked, setIsClicked] = useState(false);
   const [visible, setVisible] = useState(false);
 
-  // Smooth cursor position update via rAF
+  // Smooth position update
   const animate = useCallback(() => {
     const cursor = cursorRef.current;
     const trail = trailRef.current;
     if (cursor) {
-      // Offset so the blade tip (top-center) is the hotspot: shift left by half width
-      cursor.style.transform = `translate(${posRef.current.x - 20}px, ${posRef.current.y}px)`;
+      // Hotspot is exact blade tip at (12, 4) in the SVG
+      cursor.style.transform = `translate3d(${posRef.current.x - 12}px, ${posRef.current.y - 4}px, 0)`;
     }
     if (trail) {
-      // Lag the trail behind the real cursor
-      trailPos.current.x += (posRef.current.x - trailPos.current.x) * 0.12;
-      trailPos.current.y += (posRef.current.y - trailPos.current.y) * 0.12;
-      trail.style.transform = `translate(${trailPos.current.x - 6}px, ${trailPos.current.y - 6}px)`;
+      // Lagging soft glow trail behind blade
+      trailPos.current.x += (posRef.current.x - trailPos.current.x) * 0.16;
+      trailPos.current.y += (posRef.current.y - trailPos.current.y) * 0.16;
+      trail.style.transform = `translate3d(${trailPos.current.x - 7}px, ${trailPos.current.y - 7}px, 0)`;
     }
     rafRef.current = requestAnimationFrame(animate);
   }, []);
 
   useEffect(() => {
-    // Only show on pointer (non-touch) capable devices
+    // Only show custom cursor on mouse/desktop devices
     const mq = window.matchMedia("(pointer: fine)");
     if (!mq.matches) return;
     setVisible(true);
@@ -173,8 +224,14 @@ export default function CustomCursor() {
     };
 
     const onClick = (e: MouseEvent) => {
-      const newPetals = spawnPetals(e.clientX, e.clientY);
-      setPetals(prev => [...prev, ...newPetals]);
+      // Trigger instant click animation
+      setIsClicked(true);
+      setTimeout(() => setIsClicked(false), 180);
+
+      const { wave, slash, particles: newParticles } = spawnClickEffects(e.clientX, e.clientY);
+      setWaves((prev) => [...prev.slice(-4), wave]);
+      setSlashes((prev) => [...prev.slice(-3), slash]);
+      setParticles((prev) => [...prev.slice(-30), ...newParticles]);
     };
 
     const onMouseOver = (e: MouseEvent) => {
@@ -206,78 +263,160 @@ export default function CustomCursor() {
     };
   }, [animate]);
 
-  // Animate petal burst particles each frame
+  // Animate click particles frame loop
   useEffect(() => {
-    if (petals.length === 0) return;
+    if (particles.length === 0 && waves.length === 0 && slashes.length === 0) return;
 
     const frameId = requestAnimationFrame(() => {
-      setPetals(prev =>
+      // 1. Waves
+      setWaves((prev) =>
         prev
-          .map(p => ({
-            ...p,
-            x: p.x + Math.cos(p.angle) * p.speed,
-            y: p.y + Math.sin(p.angle) * p.speed + 0.6, // gravity
-            opacity: p.opacity - 0.035,
-            rotation: p.rotation + p.rotationSpeed,
-            speed: p.speed * 0.94,
+          .map((w) => ({
+            ...w,
+            size: w.size + 4.5,
+            opacity: w.opacity - 0.06,
           }))
-          .filter(p => p.opacity > 0)
+          .filter((w) => w.opacity > 0)
+      );
+
+      // 2. Slashes
+      setSlashes((prev) =>
+        prev
+          .map((s) => ({
+            ...s,
+            opacity: s.opacity - 0.08,
+          }))
+          .filter((s) => s.opacity > 0)
+      );
+
+      // 3. Particles
+      setParticles((prev) =>
+        prev
+          .map((p) => ({
+            ...p,
+            x: p.x + p.vx,
+            y: p.y + p.vy,
+            vy: p.vy + 0.2, // subtle gravity
+            opacity: p.opacity - 0.03,
+            rotation: p.rotation + p.rotationSpeed,
+            size: Math.max(1, p.size * 0.96),
+          }))
+          .filter((p) => p.opacity > 0)
       );
     });
 
     return () => cancelAnimationFrame(frameId);
-  }, [petals]);
+  }, [particles, waves, slashes]);
 
   if (!visible) return null;
 
   return (
     <>
-      {/* Main cursor — sword tip is the hotspot (top-center of SVG) */}
+      {/* Main Sword Cursor */}
       <div
         ref={cursorRef}
         className="pointer-events-none fixed top-0 left-0 z-[9999] will-change-transform"
-        style={{ width: 40, height: 64 }}
+        style={{ width: 48, height: 72 }}
       >
         <div
           style={{
-            transform: `scale(${isHovering ? 1.2 : 1})`,
-            transition: "transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
-            transformOrigin: "top center",
+            transform: `scale(${isClicked ? 0.82 : isHovering ? 1.25 : 1}) rotate(${
+              isClicked ? -15 : isHovering ? -5 : 0
+            }deg)`,
+            transition: isClicked
+              ? "transform 0.08s ease-out"
+              : "transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
+            transformOrigin: "12px 4px",
           }}
         >
-          <CursorSVG size={40} />
+          <SwordSVG size={44} />
         </div>
       </div>
 
-      {/* Soft trailing glow dot */}
+      {/* Blade Glow Motion Trail */}
       <div
         ref={trailRef}
         className="pointer-events-none fixed top-0 left-0 z-[9998] will-change-transform"
         style={{
-          width: 12,
-          height: 12,
+          width: 14,
+          height: 14,
           borderRadius: "50%",
-          background: "rgba(255,255,255,0.18)",
-          boxShadow: "0 0 8px 2px rgba(255,255,255,0.25)",
+          background: "radial-gradient(circle, rgba(56,189,248,0.4) 0%, rgba(255,255,255,0.15) 60%, transparent 100%)",
+          boxShadow: "0 0 12px 3px rgba(56,189,248,0.35)",
           backdropFilter: "blur(2px)",
         }}
       />
 
-      {/* Click burst petals — rendered at fixed position over everything */}
-      {petals.map(p => (
+      {/* ── Click Effects Container ── */}
+
+      {/* Shockwave Rings */}
+      {waves.map((w) => (
+        <div
+          key={w.id}
+          className="pointer-events-none fixed top-0 left-0 z-[9996] rounded-full border border-sky-300/80 shadow-[0_0_20px_rgba(56,189,248,0.6)]"
+          style={{
+            transform: `translate3d(${w.x - w.size / 2}px, ${w.y - w.size / 2}px, 0)`,
+            width: w.size,
+            height: w.size,
+            opacity: w.opacity,
+          }}
+        />
+      ))}
+
+      {/* Sword Slash Energy Streaks */}
+      {slashes.map((s) => (
+        <div
+          key={s.id}
+          className="pointer-events-none fixed top-0 left-0 z-[9996] origin-center"
+          style={{
+            transform: `translate3d(${s.x - 30}px, ${s.y - 4}px, 0) rotate(${s.angle}deg)`,
+            width: 60,
+            height: 8,
+            opacity: s.opacity,
+            background: "linear-gradient(90deg, transparent 0%, #ffffff 50%, #38bdf8 80%, transparent 100%)",
+            boxShadow: "0 0 15px #38bdf8, 0 0 30px #ffffff",
+            borderRadius: "999px",
+          }}
+        />
+      ))}
+
+      {/* Energy Burst Particles */}
+      {particles.map((p) => (
         <div
           key={p.id}
           className="pointer-events-none fixed top-0 left-0 z-[9997] will-change-transform"
           style={{
-            transform: `translate(${p.x - p.size / 2}px, ${p.y - p.size / 2}px)`,
+            transform: `translate3d(${p.x - p.size / 2}px, ${p.y - p.size / 2}px, 0) rotate(${p.rotation}deg)`,
+            opacity: p.opacity,
           }}
         >
-          <PetalShape
-            size={p.size}
-            hue={p.hue}
-            opacity={p.opacity}
-            rotation={p.rotation}
-          />
+          {p.type === "shard" ? (
+            <svg width={p.size} height={p.size} viewBox="0 0 24 24">
+              <path
+                d="M12 0 L15 12 L12 24 L9 12 Z"
+                fill={p.color}
+                style={{ filter: "drop-shadow(0 0 4px rgba(255,255,255,0.8))" }}
+              />
+            </svg>
+          ) : p.type === "spark" ? (
+            <svg width={p.size} height={p.size} viewBox="0 0 24 24">
+              <path
+                d="M12 2 L14 10 L22 12 L14 14 L12 22 L10 14 L2 12 L10 10 Z"
+                fill={p.color}
+                style={{ filter: "drop-shadow(0 0 5px #38bdf8)" }}
+              />
+            </svg>
+          ) : (
+            <div
+              style={{
+                width: p.size,
+                height: p.size,
+                borderRadius: "50%",
+                backgroundColor: p.color,
+                boxShadow: `0 0 8px ${p.color}`,
+              }}
+            />
+          )}
         </div>
       ))}
     </>
