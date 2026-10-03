@@ -211,9 +211,22 @@ export default function Home() {
             Ecosystem
           </p>
           <div className="flex overflow-x-auto md:flex-wrap items-center gap-8 md:gap-12 opacity-60 pb-1 md:pb-0">
-            {['Voidverse', 'VoidAnime', 'Voidloop', 'Voidcrafts', 'Void-Files', 'VoidDrops'].map((brand, i) => (
-              <a key={i} href="#ecosystem" className="text-xs tracking-widest uppercase text-white font-medium hover:text-gray-300 transition-colors cursor-pointer flex-shrink-0">
-                {brand}
+            {[
+              { name: "Voidverse", href: "https://voidverse.me" },
+              { name: "VoidAnime", href: "https://github.com/voidbornfr/VoidAnime-Desktop" },
+              { name: "Voidloop", href: "https://github.com/voidbornfr/voidloop-global" },
+              { name: "Voidcrafts", href: "https://voidcrafts.space" },
+              { name: "Void-Files", href: "https://github.com/voidbornfr/void-files" },
+              { name: "VoidDrops", href: "https://github.com/voidbornfr" },
+            ].map((brand, i) => (
+              <a
+                key={i}
+                href={brand.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs tracking-widest uppercase text-white font-medium hover:text-gray-300 transition-colors cursor-pointer flex-shrink-0"
+              >
+                {brand.name}
               </a>
             ))}
           </div>
