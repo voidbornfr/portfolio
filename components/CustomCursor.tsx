@@ -85,101 +85,16 @@ function spawnClickEffects(x: number, y: number) {
   return { wave, slash, particles };
 }
 
-// ─── Tilted Sword SVG — Matching VOID Logo Aesthetic ─────────────────────────
-// Hotspot is exact tip of the blade at (12, 4)
-const SwordSVG = ({ size = 42 }: { size?: number }) => (
-  <svg
+// ─── Custom Logo Cursor Component — Using /logo.cur ─────────────────────────
+const SwordSVG = ({ size = 56 }: { size?: number }) => (
+  <img
+    src="/logo.cur"
+    alt="Custom Cursor"
     width={size}
-    height={size * 1.5}
-    viewBox="0 0 48 72"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    className="drop-shadow-[0_0_8px_rgba(255,255,255,0.7)] filter"
-  >
-    <defs>
-      {/* Blade Gradient */}
-      <linearGradient id="bladeMainGrad" x1="12" y1="4" x2="26" y2="48" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#ffffff" />
-        <stop offset="30%" stopColor="#f0f9ff" />
-        <stop offset="70%" stopColor="#94a3b8" />
-        <stop offset="100%" stopColor="#475569" />
-      </linearGradient>
-
-      {/* Cyber Edge Glow */}
-      <linearGradient id="edgeGlow" x1="12" y1="4" x2="12" y2="48" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.9" />
-        <stop offset="50%" stopColor="#ffffff" stopOpacity="1" />
-        <stop offset="100%" stopColor="#818cf8" stopOpacity="0.6" />
-      </linearGradient>
-
-      {/* Crossguard Metallic */}
-      <linearGradient id="guardGrad" x1="4" y1="44" x2="28" y2="50" gradientUnits="userSpaceOnUse">
-        <stop offset="0%" stopColor="#e2e8f0" />
-        <stop offset="50%" stopColor="#ffffff" />
-        <stop offset="100%" stopColor="#64748b" />
-      </linearGradient>
-    </defs>
-
-    {/* Group tilted -18 degrees to left around blade tip (12, 4) */}
-    <g transform="rotate(-18 12 4)">
-      {/* Blade outer glow aura */}
-      <path
-        d="M12 4 L7 44 L12 49 L17 44 Z"
-        fill="url(#edgeGlow)"
-        opacity="0.5"
-        className="blur-[1px]"
-      />
-
-      {/* Main Blade Tapered Body */}
-      <path
-        d="M12 4 L8 44 L12 48 L16 44 Z"
-        fill="url(#bladeMainGrad)"
-        stroke="rgba(255,255,255,0.8)"
-        strokeWidth="0.75"
-      />
-
-      {/* Blade Central Fuller / Energy Groove */}
-      <line
-        x1="12"
-        y1="6"
-        x2="12"
-        y2="45"
-        stroke="#ffffff"
-        strokeWidth="1.2"
-        strokeLinecap="round"
-        style={{ filter: "drop-shadow(0 0 3px #38bdf8)" }}
-      />
-      <line
-        x1="12"
-        y1="10"
-        x2="12"
-        y2="40"
-        stroke="#38bdf8"
-        strokeWidth="0.6"
-      />
-
-      {/* Winged Cyber Crossguard */}
-      <path
-        d="M2 46 C6 44, 10 44, 12 47 C14 44, 18 44, 22 46 L20 50 C16 48, 14 48, 12 50 C10 48, 8 48, 4 50 Z"
-        fill="url(#guardGrad)"
-        stroke="rgba(255,255,255,0.9)"
-        strokeWidth="0.6"
-      />
-
-      {/* Center Core Void Gem */}
-      <polygon points="12,45 14,47.5 12,50 10,47.5" fill="#38bdf8" stroke="#ffffff" strokeWidth="0.5" />
-
-      {/* Wrapped Handle Grip */}
-      <rect x="10.5" y="50" width="3" height="13" rx="1" fill="#1e293b" stroke="rgba(255,255,255,0.4)" strokeWidth="0.5" />
-      {[52.5, 55.5, 58.5, 61.5].map((y) => (
-        <line key={y} x1="10" y1={y} x2="14" y2={y} stroke="#e2e8f0" strokeWidth="0.8" />
-      ))}
-
-      {/* Pommel Crystal */}
-      <polygon points="12,63 15,66 12,69 9,66" fill="url(#guardGrad)" stroke="#ffffff" strokeWidth="0.6" />
-      <circle cx="12" cy="66" r="1.2" fill="#38bdf8" />
-    </g>
-  </svg>
+    height={size}
+    className="drop-shadow-[0_0_12px_rgba(56,189,248,0.85)] filter object-contain pointer-events-none"
+    style={{ transform: "scaleY(-1)" }}
+  />
 );
 
 export default function CustomCursor() {
@@ -201,11 +116,11 @@ export default function CustomCursor() {
     const cursor = cursorRef.current;
     const trail = trailRef.current;
     if (cursor) {
-      // Hotspot is exact blade tip at (12, 4) in the SVG
-      cursor.style.transform = `translate3d(${posRef.current.x - 12}px, ${posRef.current.y - 4}px, 0)`;
+      // Offset by half cursor size (30px) for exact pointer alignment
+      cursor.style.transform = `translate3d(${posRef.current.x - 30}px, ${posRef.current.y - 30}px, 0)`;
     }
     if (trail) {
-      // Lagging soft glow trail behind blade
+      // Lagging soft glow trail behind cursor
       trailPos.current.x += (posRef.current.x - trailPos.current.x) * 0.16;
       trailPos.current.y += (posRef.current.y - trailPos.current.y) * 0.16;
       trail.style.transform = `translate3d(${trailPos.current.x - 7}px, ${trailPos.current.y - 7}px, 0)`;
@@ -316,20 +231,20 @@ export default function CustomCursor() {
       <div
         ref={cursorRef}
         className="pointer-events-none fixed top-0 left-0 z-[9999] will-change-transform"
-        style={{ width: 48, height: 72 }}
+        style={{ width: 60, height: 60 }}
       >
         <div
           style={{
-            transform: `scale(${isClicked ? 0.82 : isHovering ? 1.25 : 1}) rotate(${
-              isClicked ? -15 : isHovering ? -5 : 0
+            transform: `scale(${isClicked ? 0.85 : isHovering ? 1.25 : 1}) rotate(${
+              isClicked ? -30 : isHovering ? -20 : -15
             }deg)`,
             transition: isClicked
               ? "transform 0.08s ease-out"
               : "transform 0.2s cubic-bezier(0.34,1.56,0.64,1)",
-            transformOrigin: "12px 4px",
+            transformOrigin: "center center",
           }}
         >
-          <SwordSVG size={44} />
+          <SwordSVG size={56} />
         </div>
       </div>
 

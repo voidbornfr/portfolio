@@ -26,10 +26,9 @@ body {
   overflow-x: clip;
 }
 
-/* Hide the native cursor on pointer-capable (non-touch) devices so the
-   custom petal cursor takes over. Touch devices keep the default cursor. */
+/* Hide default browser cursor so only custom interactive cursor is displayed */
 @media (pointer: fine) {
-  *, *::before, *::after {
+  html, body, *, *::before, *::after {
     cursor: none !important;
   }
 }
